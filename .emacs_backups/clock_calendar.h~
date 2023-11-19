@@ -1,0 +1,35 @@
+#include <string>
+#include <iostream>
+
+using namespace std;
+
+class Clock {
+ protected:
+	int hr, min, sec, is_pm;
+ public:
+	Clock();
+	~Clock();
+	void setClock(int h, int s, int m, int pm);
+	void readClock(int& h, int& s, int& m, int& pm);
+	void advance();
+};
+
+class Calendar {
+ protected:
+	int mo, day, yr;
+ public:
+	Calendar();
+	~Calendar();
+	void setCalendar(int m, int d,	int y);
+	void readCalendar(int& m, int& d, int& y);
+	void advance();
+};
+
+class ClockCalendar : public Clock, public Calendar {
+ private:
+    uint64_t lastAdvanceTime;
+ public:
+    ClockCalendar() : Clock(0, 0, 0, 0), Calendar(0, 0, 0), lastAdvanceTime(0) {}
+    ~ClockCalendar() {}
+    void advance() override;
+};
