@@ -5,18 +5,18 @@ cmake_minimum_required(VERSION 3.5)
 
 file(MAKE_DIRECTORY
   "/home/joaoc/pico/pico-sdk/tools/pioasm"
-  "/home/joaoc/Documents/C++/eps_monitor/build/pioasm"
-  "/home/joaoc/Documents/C++/eps_monitor/build/pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm"
-  "/home/joaoc/Documents/C++/eps_monitor/build/pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/tmp"
-  "/home/joaoc/Documents/C++/eps_monitor/build/pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/src/PioasmBuild-stamp"
-  "/home/joaoc/Documents/C++/eps_monitor/build/pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/src"
-  "/home/joaoc/Documents/C++/eps_monitor/build/pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/src/PioasmBuild-stamp"
+  "/home/joaoc/Documents/GitHub/eps_monitor/build/pioasm"
+  "/home/joaoc/Documents/GitHub/eps_monitor/build/pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm"
+  "/home/joaoc/Documents/GitHub/eps_monitor/build/pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/tmp"
+  "/home/joaoc/Documents/GitHub/eps_monitor/build/pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/src/PioasmBuild-stamp"
+  "/home/joaoc/Documents/GitHub/eps_monitor/build/pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/src"
+  "/home/joaoc/Documents/GitHub/eps_monitor/build/pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/src/PioasmBuild-stamp"
 )
 
 set(configSubDirs )
 foreach(subDir IN LISTS configSubDirs)
-    file(MAKE_DIRECTORY "/home/joaoc/Documents/C++/eps_monitor/build/pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/src/PioasmBuild-stamp/${subDir}")
+    file(MAKE_DIRECTORY "/home/joaoc/Documents/GitHub/eps_monitor/build/pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/src/PioasmBuild-stamp/${subDir}")
 endforeach()
 if(cfgdir)
-  file(MAKE_DIRECTORY "/home/joaoc/Documents/C++/eps_monitor/build/pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/src/PioasmBuild-stamp${cfgdir}") # cfgdir has leading slash
+  file(MAKE_DIRECTORY "/home/joaoc/Documents/GitHub/eps_monitor/build/pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/src/PioasmBuild-stamp${cfgdir}") # cfgdir has leading slash
 endif()

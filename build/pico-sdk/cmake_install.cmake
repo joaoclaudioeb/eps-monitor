@@ -39,9 +39,9 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/home/joaoc/Documents/C++/eps_monitor/build/pico-sdk/tools/cmake_install.cmake")
-  include("/home/joaoc/Documents/C++/eps_monitor/build/pico-sdk/src/cmake_install.cmake")
-  include("/home/joaoc/Documents/C++/eps_monitor/build/pico-sdk/docs/cmake_install.cmake")
+  include("/home/joaoc/Documents/GitHub/eps_monitor/build/pico-sdk/tools/cmake_install.cmake")
+  include("/home/joaoc/Documents/GitHub/eps_monitor/build/pico-sdk/src/cmake_install.cmake")
+  include("/home/joaoc/Documents/GitHub/eps_monitor/build/pico-sdk/docs/cmake_install.cmake")
 
 endif()
 
