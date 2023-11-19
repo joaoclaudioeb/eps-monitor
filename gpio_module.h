@@ -44,7 +44,7 @@ enum LoadType {
 };
 
 class GPIOModule {
-protected:   
+private:   
     static int sErrorStatus; 
 public:
     /**

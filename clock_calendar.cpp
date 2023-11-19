@@ -1,6 +1,18 @@
-#include "clock_calendar.h"
+/**
+ * @file clock_calendar.cpp
+ *
+ * @brief This file contains the implementation of classes to get events' date and time.
+ *
+ * @details It Implements the management of date and time, considering hours, minutes, seconds, as well as
+ * months, days and years.
+ *
+ * @author João Cláudio Elsen Barcellos <joao.barcellos@posgrad.ufsc.br>
+ * @version 0.0.0
+ *
+ * @date 12/11/2023
+ */
 
-using namespace std;
+#include "clock_calendar.h"
 
 Clock::Clock(int h, int s, int m, int pm){
 	hr = h;
@@ -48,9 +60,9 @@ ClockCalendar::~ClockCalendar(){}
 void ClockCalendar::advance(){
     int was_pm = is_pm;
     
-    int64_t currentTime = time_us_64(); // Obter tempo atual em microssegundos
+    int64_t currentTime = time_us_64(); // Obtain the elapsed time since the initialization, in us 
     int64_t elapsedTime = currentTime - lastAdvanceTime;
-    int elapsedSeconds = elapsedTime / 1000000; // Converter para segundos
+    int elapsedSeconds = elapsedTime / 1000000; // Convert the time in us to s
     
 	 
 	Clock::advance(elapsedSeconds);
