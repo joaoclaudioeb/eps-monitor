@@ -1,3 +1,0 @@
-/home/joaoc/Documents/GitHub/eps_monitor/build/pioasm/CMakeFiles/pioasm.dir
-/home/joaoc/Documents/GitHub/eps_monitor/build/pioasm/CMakeFiles/edit_cache.dir
-/home/joaoc/Documents/GitHub/eps_monitor/build/pioasm/CMakeFiles/rebuild_cache.dir

@@ -1,0 +1,23 @@
+ID69:16/11/2023 0:0:0: Verificando integridade do módulo de GPIO.
+ID69:16/11/2023 0:0:2: ....Módulo de GPIO está funcionando corretamente.
+ID69:16/11/2023 0:0:4: Verificando integridade do módulo de ADC para a leitura de tensão.
+ID69:16/11/2023 0:0:4: ....Módulo de ADC está funcionando corretamente.
+ID69:16/11/2023 0:0:4: Verificando integridade do módulo de ADC para a leitura de corrente.
+ID69:16/11/2023 0:0:4: ....Módulo de ADC está funcionando corretamente.
+ID69:16/11/2023 0:0:4: Verificando integridade do módulo de UART.
+ID69:16/11/2023 0:0:4: ....Módulo de UART está funcionando corretamente.
+ID69:16/11/2023 0:0:4: Todos os módulos estão operacionais.
+ID69:16/11/2023 0:0:4: Inicializando leituras no barramento de 5V.
+ID69:16/11/2023 0:0:5: Habilitando a carga do barramento PAYLOAD.
+ID69:16/11/2023 0:0:5: ....Leituras dentro do esperado, desabilitando carga e acionando a próxima.
+ID69:16/11/2023 0:0:5: Habilitando a carga do barramento RADIO_MAIN.
+ID69:16/11/2023 0:0:5: ....Leituras dentro do esperado, desabilitando carga e acionando a próxima.
+ID69:16/11/2023 0:0:5: Habilitando a carga do barramento RADIO_BEACON.
+ID69:16/11/2023 0:0:5: ....Leituras dentro do esperado, desabilitando carga e trocando de barramento.
+ID69:16/11/2023 0:0:5: Inicializando leituras no barramento de 3V3.
+ID69:16/11/2023 0:0:6: Habilitando a carga do barramento ANT_DEP.
+ID69:16/11/2023 0:0:6: ....Leituras dentro do esperado, desabilitando carga e acionando a próxima.
+ID69:16/11/2023 0:0:6: Habilitando a carga do barramento BEACON.
+ID69:16/11/2023 0:0:6: ....Leituras dentro do esperado, desabilitando carga e acionando a próxima.
+ID69:16/11/2023 0:0:6: Habilitando a carga do barramento OBDH.
+ID69:17/11/2024 0:0:6: ....Leitura de corrente está fora do esperado, desabilitando carga e saindo.
