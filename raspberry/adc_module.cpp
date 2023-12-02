@@ -41,9 +41,9 @@ void VoltageSensor::readSensor() {
 int VoltageSensor::evaluateValue(BusType bus){
     int err = 0;
     float auxValue = 0;
-
+    
     readSensor();
-
+    
     switch(bus){
     case BUS_5V0:
         auxValue = ((voltageValue - 1.65) / 1.65) * 100.0;
@@ -54,14 +54,14 @@ int VoltageSensor::evaluateValue(BusType bus){
     default:
         break;
     }
-
+    
     if((auxValue * ((auxValue > 0) - (auxValue < 0))) > 5 ){
         err = 1;
     }
     else{
         err = 0;
     }
-
+    
     return err;
 }
 
@@ -90,9 +90,9 @@ void CurrentSensor::readSensor() {
 int CurrentSensor::evaluateValue(BusType bus){
     int err = 0;
     float auxValue = 0;
-
+    
     readSensor();
-
+    
     switch(bus){
     case ANT_DEP:
         auxValue = ((currentValue - 1.65) / 1.65) * 100.0;
@@ -122,6 +122,6 @@ int CurrentSensor::evaluateValue(BusType bus){
     else{
         err = 0;
     }
-
+    
     return err;
 }

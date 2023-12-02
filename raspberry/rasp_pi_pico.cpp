@@ -1,3 +1,16 @@
+/**
+ * @file rasp_pi_pico.cpp
+ *
+ * @brief This file contains the source code defining the class for the Raspberry Pi Pico system.
+ *
+ * @details It implements functionalities related to the Raspberry Pi Pico system operation.
+ *
+ * @author João Cláudio Elsen Barcellos <joao.barcellos@posgrad.ufsc.br>
+ * @version 0.0.0
+ *
+ * @date 12/11/2023
+ */
+
 #include "rasp_pi_pico.h"
 
 RaspberryPiPico::RaspberryPiPico(){}
@@ -7,7 +20,9 @@ RaspberryPiPico::~RaspberryPiPico(){}
 void RaspberryPiPico::initialize(){
     int auxErr = 0;
     int err = 1;
-    
+    /**
+     * Starts the tests regarding the GPIO modules
+     */
     createLog({+time, "Verificando integridade do módulo de GPIO.", ID_RASP});
     for(int i = 0; (i < 3) && err; i++){
         if(!test.setupAndVerifyGPIOModule(gpio)){
@@ -21,7 +36,9 @@ void RaspberryPiPico::initialize(){
         else
             createLog({+time, "....Módulo de GPIO não está funcionando corretamente, tentando novamente.", ID_RASP});
     }
-
+    /**
+     * Starts the tests regarding the voltage sensor
+     */
     adc = new VoltageSensor();
     createLog({+time, "Verificando integridade do módulo de ADC para a leitura de tensão.", ID_RASP});
     err = 1;
@@ -39,7 +56,9 @@ void RaspberryPiPico::initialize(){
     }
 
     delete adc;
-
+    /**
+     * Starts the tests regarding the current sensor
+     */
     adc = new CurrentSensor();
     createLog({+time, "Verificando integridade do módulo de ADC para a leitura de corrente.", ID_RASP});
     err = 1;
@@ -57,7 +76,10 @@ void RaspberryPiPico::initialize(){
     }
 
     delete adc;
-    
+
+    /**
+     * Starts the tests regarding the UART module
+     */
     createLog({+time, "Verificando integridade do módulo de UART.", ID_RASP});
     err = 1;
     for(int i = 0; (i < 3) && err; i++){
@@ -74,7 +96,9 @@ void RaspberryPiPico::initialize(){
     }
 
     
-
+    /**
+     * It defines if the initialization ended without errors
+     */
     if(auxErr != 0){
         createLog({+time, "Ocorreram erros no programa, saindo.", ID_RASP});
         currentState = END_STATE;
@@ -96,11 +120,16 @@ void RaspberryPiPico::sendLog(){
         SystemData log = logQueue.readFirstLog();
         string message = "ID" + log.ID + ":" + log.date + ": " + log.message + "\r\n";
         uart.sendPackage(message.c_str());
-        //cout << "ID" << log.ID << ":" << log.date << ": " << log.message << endl;
         logQueue.removeFirstLog();
     }
 }
 
+/**
+ * With this method the system's state-machine is, in fact, run.
+ * 
+ * @TODO This method could have been implemented differently, in a leaner way.
+ * This would be for future updates.
+ */
 void RaspberryPiPico::run(){
     int auxExit = 0;
     
@@ -110,15 +139,14 @@ void RaspberryPiPico::run(){
         switch(currentState){
         case SETUP_AND_TESTING_STATE:
             /**
-              * Este é o estado onde a inicialzação dos módulos é feita, bem como alguns
-              * testes são conduzidos, para ver a integridade deles.
+              * This is the state in which the system is initialized and each module
+              * is tested.
               */
             initialize();
             break;
         case READ_5V0_BUS_STATE:
             /**
-              * Este é o estado onde a inicialzação das leituras do barramento de 5V é feita.
-              * 
+              * This is the state in which the 5V0 bus is monitored and evaluated. 
               */
             adc = new VoltageSensor();            
 
@@ -161,9 +189,6 @@ void RaspberryPiPico::run(){
                 sendLog();
             }
 
-            
-
-
             createLog({+time, "Habilitando a carga do barramento RADIO_MAIN.", ID_RASP});
             gpio.driveLoad(RADIO_MAIN);
             
@@ -200,10 +225,7 @@ void RaspberryPiPico::run(){
                 createLog({+time, "....Leituras dentro do esperado, desabilitando carga e acionando a próxima.", ID_RASP});
                 sendLog();
             }
-            
-            
-
-            
+                 
             createLog({+time, "Habilitando a carga do barramento RADIO_BEACON.", ID_RASP});
             gpio.driveLoad(RADIO_BEACON);
             for(int i = 0; (i < 5000) && !auxExit; i++){
@@ -246,8 +268,7 @@ void RaspberryPiPico::run(){
             break;
         case READ_3V3_BUS_STATE:
             /**
-              * Este é o estado onde a inicialzação das leituras do barramento de 3V3 é feita.
-              * 
+              * This is the state in which the 3V3 bus is monitored and evaluated. 
               */
             adc = new VoltageSensor();            
             createLog({+time, "Inicializando leituras no barramento de 3V3.", ID_RASP});
@@ -289,9 +310,6 @@ void RaspberryPiPico::run(){
                 sendLog();
             }
 
-
-
-
             createLog({+time, "Habilitando a carga do barramento BEACON.", ID_RASP});
             gpio.driveLoad(BEACON);
             
@@ -328,9 +346,6 @@ void RaspberryPiPico::run(){
                 createLog({+time, "....Leituras dentro do esperado, desabilitando carga e acionando a próxima.", ID_RASP});
                 sendLog();
             }
-
-
-
 
             createLog({+time, "Habilitando a carga do barramento OBDH.", ID_RASP});
             gpio.driveLoad(OBDH);
@@ -375,9 +390,10 @@ void RaspberryPiPico::run(){
             break;
         case END_STATE:
             /**
-              * Este é o estado onde o programa para, caso ocorram erros que possam danificar o Raspberry Pi Pico
-              * ou pior, o RE²PS.
-              * 
+              * This is the state where the system stop its operation, if something wrong is detected.
+              *
+              * @TODO It's not the most interesting way to act on a mistake. Perhaps it would be interesting
+              * to have a routine to see if it's possible to correct the problem or something similar
               */
             createLog({+time, "Fim do programa por problemas nos barramentos..", ID_RASP});
             sendLog();

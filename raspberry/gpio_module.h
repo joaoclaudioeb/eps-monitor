@@ -1,7 +1,7 @@
 /**
  * @file gpio_module.h
  *
- * @brief Header file defining the class for the GPIO module.
+ * @brief This file contains the header declaring the class for the GPIO module.
  *
  * @details Contains declarations of the class and functionalities related to the 
  * General Purpose Input/Output (GPIO) module.
@@ -21,7 +21,7 @@
 class VigilantCompanion;
 
 /**
- * Some masks for the GPIO configuration
+ * Some macros for the GPIO configuration
  */
 #define GPIO_INIT_PINS 0x121603C0
 #define GPIO_DIR_PINS 0x21603C0

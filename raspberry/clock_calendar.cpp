@@ -1,7 +1,7 @@
 /**
  * @file clock_calendar.cpp
  *
- * @brief This file contains the implementation of classes to get events' date and time.
+ * @brief This file contains the source code defining classes to get events' date and time.
  *
  * @details It Implements the management of date and time, considering hours, minutes, seconds, as well as
  * months, days and years.
@@ -15,10 +15,10 @@
 #include "clock_calendar.h"
 
 Clock::Clock(int h, int s, int m, int pm){
-	hr = h;
-	min = m;
-	sec = s;
-	is_pm = pm;
+    hr = h;
+    min = m;
+    sec = s;
+    is_pm = pm;
 }
 Clock::~Clock(){}
 
@@ -37,20 +37,20 @@ void Clock::advance(int elapsedSeconds){
 }
 
 Calendar::Calendar(int m, int d, int y){
-	mo = m;
-	day = d;
-	yr = y;
+    mo = m;
+    day = d;
+    yr = y;
 }
 Calendar::~Calendar(){}
 
 void Calendar::advance(){
-	if(++day > 30){
-		day = 1;
-		if(++mo > 12){
-			mo = 1;
-			yr++;
-		}
-	}
+    if(++day > 30){
+        day = 1;
+        if(++mo > 12){
+            mo = 1;
+            yr++;
+        }
+    }
 }
 
 
@@ -59,14 +59,20 @@ ClockCalendar::~ClockCalendar(){}
 
 void ClockCalendar::advance(){
     int was_pm = is_pm;
-    
-    int64_t currentTime = time_us_64(); // Obtain the elapsed time since the initialization, in us 
+
+    /**
+     * Obtain the elapsed time since the initialization, in us
+     */
+    int64_t currentTime = time_us_64(); 
     int64_t elapsedTime = currentTime - lastAdvanceTime;
-    int elapsedSeconds = elapsedTime / 1000000; // Convert the time in us to s
+    /**
+     * Convert the time in us to s
+     */
+    int elapsedSeconds = elapsedTime / 1000000; 
     
-	 
-	Clock::advance(elapsedSeconds);
-	if (was_pm && !is_pm)
+    
+    Clock::advance(elapsedSeconds);
+    if (was_pm && !is_pm)
         Calendar::advance();
     lastAdvanceTime = currentTime;
 }

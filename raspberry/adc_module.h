@@ -1,7 +1,8 @@
 /**
  * @file adc_module.h
  *
- * @brief Header file defining abstract and derived classes for the ADC module.
+ * @brief This file contains the header declaring abstract and derived classes 
+ * for the ADC module.
  *
  * @details Contains declarations of classes and functionalities related to the 
  * Analog-to-Digital Converter (ADC) module.
@@ -18,7 +19,7 @@
 #include "gpio_module.h"
 
 /**
- * Some defines for the ADC configuration
+ * Some macros for the ADC configuration
  */
 #define ADC_PIN 28
 #define ADC_INPUT 2
@@ -34,7 +35,7 @@ class VigilantCompanion;
  * @brief An abstract base class that defines the interface for derived classes.
  *
  * @details This class serves as an interface for different sensors, shuch as
- * INA199CxDCKR and LMV321RIYLT. It defines methods that must be implemented by
+ * INA199CxDCKR and LMV321RIYLT. It declares methods that must be implemented by
  * derived sensor classes.
  */
 class ADCModule {
@@ -49,7 +50,7 @@ public:
      * to private and protected members.
      */
     friend class VigilantCompanion;
-
+    
     /**
      * @brief Pure virtual function to read sensor values.
      *

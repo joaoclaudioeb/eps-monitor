@@ -1,7 +1,7 @@
 /**
  * @file clock_calendar.h
  *
- * @brief Header file defining the classes to get events' date and time.
+ * @brief This file contains the header declaring the classes to get events' date and time.
  *
  * @details Contains declarations of classes and functionalities related to the management of date and time.
  *
@@ -25,11 +25,11 @@
  * @details Provides functionalities to manage the time.
  */
 class Clock {
- protected:
-	int hr, min, sec, is_pm;
- public:
-	Clock(int h, int s, int m, int pm);
-	~Clock();
+protected:
+    int hr, min, sec, is_pm;
+public:
+    Clock(int h, int s, int m, int pm);
+    ~Clock();
     /**
      * @brief Advances the time by the given seconds.
      *
@@ -37,7 +37,7 @@ class Clock {
      *
      * @details Updates the time based on the provided elapsed time (given in seconds).
      */
-	void advance(int elapsedSeconds);
+    void advance(int elapsedSeconds);
 };
 
 /**
@@ -48,18 +48,18 @@ class Clock {
  * @details Provides functionalities to manage the date.
  */
 class Calendar {
- protected:
-	int mo, day, yr;
- public:
-	Calendar(int m, int d, int y);
-	~Calendar();
-
+protected:
+    int mo, day, yr;
+public:
+    Calendar(int m, int d, int y);
+    ~Calendar();
+    
     /**
      * @brief Advances the date.
      *
      * @details Updates the date considering internal logic.
      */
-	void advance();
+    void advance();
 };
 
 /**
@@ -70,9 +70,9 @@ class Calendar {
  * @details Provides functionalities to manage both time and date simultaneously.
  */
 class ClockCalendar : public Clock, public Calendar {
- private:
+private:
     uint64_t lastAdvanceTime;
- public:
+public:
     ClockCalendar();
     ~ClockCalendar();
     
@@ -82,7 +82,7 @@ class ClockCalendar : public Clock, public Calendar {
      * @details Updates both time and date based on internal calculations.
      */
     void advance();
-
+    
     /**
      * @brief Converts an integer to a string.
      *
@@ -104,7 +104,7 @@ class ClockCalendar : public Clock, public Calendar {
         }
         return result;
     }
-
+    
     /**
      * @brief Overrides the '+' operator to generate a string with a representation of date and time.
      *

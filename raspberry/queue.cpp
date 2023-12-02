@@ -1,3 +1,16 @@
+/**
+ * @file queue.cpp
+ *
+ * @brief This file contains the source code defining the class for the queue.
+ *
+ * @details It implements functionalities related to the queue creation.
+ *
+ * @author João Cláudio Elsen Barcellos <joao.barcellos@posgrad.ufsc.br>
+ * @version 0.0.0
+ *
+ * @date 12/11/2023
+ */
+
 #include "queue.h"
 #include <iostream>
 
@@ -10,7 +23,10 @@ Queue::~Queue() {
         delete head;
         head = cursor;
     }
-    head = nullptr; // Officially empty
+    /**
+     * Now it is officially empty
+     */
+     head = nullptr; 
 }
 
 void Queue::insertLog(const SystemData& systemData) {
@@ -32,7 +48,10 @@ SystemData Queue::readFirstLog() {
     if (head != nullptr)
         return head->getData();
     else
-        return SystemData(); // Returning an empty SystemData when the queue is empty
+        /**
+         * Returning an empty SystemData when the queue is empty
+         */
+         return SystemData(); 
 }
 
 void Queue::removeFirstLog() {

@@ -1,12 +1,16 @@
 /**
  * @file vigilant_companion.cpp
  *
- * @brief This is the source file for the class for the module's testing and configuration.
+ * @brief This file contains the source code defining the class module's testing
+ * and configuration.
  *
- * \author João Cláudio Elsen Barcellos <joao.barcellos@posgrad.ufsc.br>
- * \version 0.0.0
+ * @details It implements functionalities related to the configuration and testing of the Raspberry
+ * Pi Pico modules.
  *
- * \date 12/11/2023
+ * @author João Cláudio Elsen Barcellos <joao.barcellos@posgrad.ufsc.br>
+ * @version 0.0.0
+ *
+ * @date 12/11/2023
  */
 
 #include "vigilant_companion.h"
@@ -61,12 +65,12 @@ int VigilantCompanion::setupAndVerifyUARTModule(UARTModule& uart) {
 
     uart.sendPackage("echo \r\n");
     
-    //if(uart.receivePackage()=="echo"){
-        //    uart.sErrorStatus = 1;
-        //}
-    //else{
-            //    uart.sErrorStatus = 0;
-            //}
+    if(uart.receivePackage()=="echo"){
+        uart.sErrorStatus = 1;
+    }
+    else{
+        uart.sErrorStatus = 0;
+    }
 
     return uart.sErrorStatus;
 }
