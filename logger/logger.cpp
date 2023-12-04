@@ -27,25 +27,37 @@ int Logger::serialPortConfig(const char* tty_channel, const char* log_file_name)
     if (tty < 0)
         err = -1;
     else {
-        // Configure baud rate to 115200 bps
-        cfsetispeed(&options, B115200); // Input speed set to 115200 bps
-        cfsetospeed(&options, B115200); // Output speed set to 115200 bps
-        
-        // Enable the receiver and set local mode
+        /**
+         * Configuring the input and output baudrate to 115200 bps
+         */ 
+        cfsetispeed(&options, B115200); 
+        cfsetospeed(&options, B115200); 
+        /**
+         * Enables the receiver and disables the interpretation of modem control lines
+         */
         options.c_cflag |= (CLOCAL | CREAD);
-        
-        options.c_cflag &= ~PARENB; // Disable parity
-        options.c_cflag &= ~CSTOPB; // Set for 1 stop bit 
-        options.c_cflag &= ~CSIZE;  // Clear character size bits 
-        options.c_cflag |= CS8;     // Set data bits to 8 
-        
-        // Set for raw input mode
+        /**
+         * Disables the parity bit
+         * Sets the stop bit to '1'
+         * Ensuring that existing settings related to character size are cleared
+         * before applying new settings
+         * Set the size of data to '8 bits'
+         */
+        options.c_cflag &= ~PARENB; 
+        options.c_cflag &= ~CSTOPB;  
+        options.c_cflag &= ~CSIZE;   
+        options.c_cflag |= CS8;      
+        /**
+         * Configuring as non-canonical input
+         */
         options.c_lflag &= ~(ICANON | ECHO | ECHOE | ISIG);
-        
-        // Set for raw output mode
+        /**
+         * Configuring as non-canonical output
+         */
         options.c_oflag &= ~OPOST;
-        
-        // Apply the modified options to the port immediately
+        /**
+         * Apply the modified options to the port immediately
+         */
         tcsetattr(tty, TCSANOW, &options);
     }
 
@@ -60,25 +72,26 @@ void Logger::serialPortRead(){
         if(len > 0){
             if (newChar == '\n') {
                 buffer[index++] = '\n';
-                buffer[index++] = '\0'; // Adiciona terminador nulo para formar uma string
+                buffer[index++] = '\0'; // Adds an '\0' to create a string
                 if(strncmp(buffer, "ID69", 4) == 0){
                     updateLogFile(&count);
-                    logQueue.insertLog(std::string(buffer));
+                    logQueue.insertLog(string(buffer));
                 }
-                else if(strncmp(buffer, "echo", 4) == 0)
+                else if(strncmp(buffer, "echo", 4) == 0){
                     write(tty, buffer, strlen(buffer));
-                memset(buffer, 0, sizeof(buffer)); // Limpa o array message
-                index = 0; // Reseta a posição do buffer   
+                }
+                memset(buffer, 0, sizeof(buffer)); // Clear 'message' 
+                index = 0; // Resets the index   
             }
             else{
-                buffer[index++] = newChar; // Adiciona o caractere lido ao buffer
+                buffer[index++] = newChar; // Adds the read character to the buffer
                 if (index >= sizeof(buffer) - 1) {
                     buffer[sizeof(buffer) - 1] = '\0';
-                    index = 0; // Reseta a posição do buffer
+                    index = 0; // Resets the index
                 }
             }
         }
-        usleep(1000); // Pequena pausa para não consumir muita CPU
+        usleep(1000); // A short-break
     }
 }
 

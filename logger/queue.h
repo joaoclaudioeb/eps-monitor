@@ -1,8 +1,30 @@
+/**
+ * @file queue.h
+ *
+ * @brief This file contains the header declaring the class for the queue.
+ *
+ * @details Contains declarations of the class and functionalities related to the 
+ * creation of queue.
+ *
+ * @author João Cláudio Elsen Barcellos <joao.barcellos@posgrad.ufsc.br>
+ * @version 0.0.0
+ *
+ * @date 12/11/2023
+ */
+
 #ifndef QUEUE_H
 #define QUEUE_H
 
 #include "node.h"
 
+/**
+ * @class Queue
+ *
+ * @brief A class representing a queue data structure.
+ *
+ * @details Manages a queue of logs represented by nodes, providing methods for insertion,
+ * removal, reading, and listing logs.
+ */
 class Queue {
 private:
     Node* head;
@@ -10,12 +32,33 @@ private:
 public:
     Queue();
     ~Queue();
-    void insertLog(const std::string& data); // Atualizando o parâmetro para std::string
-    std::string readFirstLog(); // Alterando o tipo de retorno para std::string
+    /**
+     * @brief Inserts a log into the queue.
+     *
+     * @param[in] data is the data to be inserted as a log.
+     */
+    void insertLog(const string& data);
+    /**
+     * @brief Reads the first log in the queue.
+     *
+     * @return The data of the first log.
+     */
+    string readFirstLog();
+    /**
+     * @brief Removes the first log from the queue.
+     */
     void removeFirstLog();
+    /**
+     * @brief Lists all logs in the queue.
+     */
     void listAllLogs();
+    /**
+     * @brief Checks if the queue is empty.
+     *
+     * @return The state of the queue (if it is empty or not).
+     */
     bool isEmpty() const;
 };
 
-#endif
+#endif /* QUEUE_H */
 
