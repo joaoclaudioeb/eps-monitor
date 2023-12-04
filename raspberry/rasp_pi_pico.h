@@ -15,13 +15,13 @@
 #ifndef RASPBERRY_PI_PICO_H
 #define RASPBERRY_PI_PICO_H
 
-#include "adc_module.h"
-#include "gpio_module.h"
-#include "vigilant_companion.h"
-#include "node.h"
-#include "queue.h"
-#include "clock_calendar.h"
-#include "uart_module.h"
+#include "adc_module.cpp"
+#include "gpio_module.cpp"
+#include "vigilant_companion.cpp"
+#include "node.cpp"
+#include "queue.cpp"
+#include "clock_calendar.cpp"
+#include "uart_module.cpp"
 
 /**
  * A macro to Raspberry Pi Pico's ID.

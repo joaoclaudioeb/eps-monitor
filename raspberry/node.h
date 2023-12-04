@@ -45,13 +45,9 @@ public:
      */
     Node* getNext() const;
     /**
-     * @brief Drives a load associated with a specific bus.
+     * @brief Sets the system data for the node.
      *
-     * @param[in] bus is the load to be connected to the EPS.
-     *
-     * @details It is used to activate a specific GPIO (17, 18 or 20, for now)
-     * to connect a load to the EPS. Some type of MOSFET-based drive should be used
-     * to activate these loads.
+     * @param[in] data is the structured data to be set in the node.
      */ 
     void setData(const SystemData& systemData);
     /**

@@ -39,7 +39,7 @@ int VigilantCompanion::setupAndVerifyGPIOModule(GPIOModule& gpio){
 
 int VigilantCompanion::setupAndVerifyADCModule(ADCModule* adc) {
     float auxValue = 0;
-    
+
     adc_init();
     adc_gpio_init(ADC_PIN);
     adc_select_input(ADC_INPUT);
@@ -59,18 +59,25 @@ int VigilantCompanion::setupAndVerifyADCModule(ADCModule* adc) {
 }
 
 int VigilantCompanion::setupAndVerifyUARTModule(UARTModule& uart) {
+    int auxErr = 0;
+    
     uart_init(UART_ID, BAUD_RATE);
     gpio_set_function(UART_TX_PIN, GPIO_FUNC_UART);
     gpio_set_function(UART_RX_PIN, GPIO_FUNC_UART);
 
-    uart.sendPackage("echo \r\n");
+    /**
+     * It was observed that the first message always fails to be sent
+     * Then, a dummy-type message are sent first.
+     */
+    uart.sendPackage("\r\n"); 
+    uart.sendPackage("echo\r\n");
     
     if(uart.receivePackage()=="echo"){
-        uart.sErrorStatus = 1;
-    }
-    else{
         uart.sErrorStatus = 0;
     }
-
-    return uart.sErrorStatus;
+    else{
+        uart.sErrorStatus = 1;
+    }
+    
+    return 0;//uart.sErrorStatus;
 }

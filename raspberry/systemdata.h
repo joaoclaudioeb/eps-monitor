@@ -22,9 +22,9 @@
  * @details Contains fields for date, message, and ID.
  */
 struct SystemData {
-    std::string date; // The event's date and time
-    std::string message; // The message to stored in a log
-    std::string ID; // ID of the dispositive
+    string date; // The event's date and time
+    string message; // The message to stored in a log
+    string ID; // ID of the dispositive
 };
 
 #endif /* SYSTEMDATA_H */

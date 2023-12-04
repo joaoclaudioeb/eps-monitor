@@ -27,6 +27,9 @@ class VigilantCompanion;
  */
 #define UART_ID uart0
 #define BAUD_RATE 115200
+#define DATA_BITS 8
+#define STOP_BITS 1
+#define PARITY UART_PARITY_NONE
 #define UART_TX_PIN 0
 #define UART_RX_PIN 1
 
@@ -57,7 +60,7 @@ public:
      *
      * @param[in] message is the message to be sent.
      */
-    void sendPackage(const char* message);
+    void sendPackage(string message);
     /**
      * @brief Receives a package over UART.
      *

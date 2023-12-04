@@ -20,19 +20,26 @@ UARTModule::UARTModule() {}
 
 UARTModule::~UARTModule() {}
 
-void UARTModule::sendPackage(const char* message) {
-    uart_puts(UART_ID, message);
+void UARTModule::sendPackage(string message) {
+    uart_puts(UART_ID, message.c_str());
 }
 
 string UARTModule::receivePackage() {
     string message;
-
-    while (1){
-        char c = uart_getc(UART_ID);
-        if (c == '\n') {
-            break;
+    bool received = false;
+    
+    while (!received) {
+        if (uart_is_readable(UART_ID)) {
+            uint8_t data = uart_getc(UART_ID);
+            // Check for the exit condition (e.g., 'x')
+            if (data == '\n') {
+                received = true;
+            }
+            message += data;
         }
-        message += c;
+
+        // Add some delay to prevent busy waiting
+        sleep_ms(100);
     }
 
     return message;

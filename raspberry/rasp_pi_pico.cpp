@@ -20,6 +20,7 @@ RaspberryPiPico::~RaspberryPiPico(){}
 void RaspberryPiPico::initialize(){
     int auxErr = 0;
     int err = 1;
+    
     /**
      * Starts the tests regarding the GPIO modules
      */
@@ -36,6 +37,7 @@ void RaspberryPiPico::initialize(){
         else
             createLog({+time, "....Módulo de GPIO não está funcionando corretamente, tentando novamente.", ID_RASP});
     }
+    
     /**
      * Starts the tests regarding the voltage sensor
      */
@@ -54,8 +56,8 @@ void RaspberryPiPico::initialize(){
         else
             createLog({+time, "....Módulo de ADC não está funcionando corretamente, tentando novamente.", ID_RASP});
     }
-
     delete adc;
+
     /**
      * Starts the tests regarding the current sensor
      */
@@ -74,7 +76,6 @@ void RaspberryPiPico::initialize(){
         else
             createLog({+time, "....Módulo de ADC não está funcionando corretamente, tentando novamente.", ID_RASP});
     }
-
     delete adc;
 
     /**
@@ -94,7 +95,6 @@ void RaspberryPiPico::initialize(){
         else
             createLog({+time, "....Módulo de UART não está funcionando corretamente, tentando novamente.", ID_RASP});
     }
-
     
     /**
      * It defines if the initialization ended without errors
@@ -119,7 +119,7 @@ void RaspberryPiPico::sendLog(){
     while (!logQueue.isEmpty()) {
         SystemData log = logQueue.readFirstLog();
         string message = "ID" + log.ID + ":" + log.date + ": " + log.message + "\r\n";
-        uart.sendPackage(message.c_str());
+        uart.sendPackage(message);
         logQueue.removeFirstLog();
     }
 }

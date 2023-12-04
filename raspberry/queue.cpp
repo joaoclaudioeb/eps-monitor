@@ -62,15 +62,6 @@ void Queue::removeFirstLog() {
     }
 }
 
-void Queue::listAllLogs() {
-    Node* aux = head;
-    while (aux != nullptr) {
-        std::cout << "ID: " << aux->getData().ID << " Date: " << aux->getData().date
-                  << " Message: " << aux->getData().message << std::endl;
-        aux = aux->getNext();
-    }
-}
-
 bool Queue::isEmpty() const {
     return (head == nullptr);
 }

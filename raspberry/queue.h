@@ -55,11 +55,6 @@ public:
     void removeFirstLog();
 
     /**
-     * @brief Lists all logs in the queue.
-     */
-    void listAllLogs();
-
-    /**
      * @brief Checks if the queue is empty.
      *
      * @return The state of the queue (if it is empty or not).
